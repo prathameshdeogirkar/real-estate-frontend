@@ -62,9 +62,9 @@ function Footer() {
             <h3 className="text-lg font-serif font-bold text-white mb-6">Contact</h3>
             <ul className="space-y-5 text-sm font-light">
               <li>
-                <a href="tel:+91728405215" className="text-gray-400 hover:text-white transition duration-300 flex items-start gap-3">
+                <a href="tel:+917058816505" className="text-gray-400 hover:text-white transition duration-300 flex items-start gap-3">
                   <Phone size={16} className="mt-0.5 text-primary" />
-                  <span>+91 728405215</span>
+                  <span>+91 7058816505</span>
                 </a>
               </li>
               <li>

@@ -8,10 +8,13 @@ import ImageCarousel from "../components/ImageCarousel";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin, Building, Shield, Star, Users, CheckCircle, Plus } from "lucide-react";
 import PropertyCard from "../components/PropertyCard";
+import ReviewModal from "../components/ReviewModal";
+import TestimonialsSection from "../components/TestimonialsSection";
 
 function Home() {
   const [properties, setProperties] = useState([]);
   const [completedProjects, setCompletedProjects] = useState([]);
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
 
   useEffect(() => {
     fetchProperties();
@@ -71,13 +74,19 @@ function Home() {
             <motion.p variants={fadeUp} className="text-lg md:text-xl text-gray-300 font-light mb-10 max-w-2xl">
               Experience unparalleled elegance and exclusivity with our curated collection of premium real estate properties.
             </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-5">
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-5 flex-wrap justify-center">
               <Link to="/properties" className="group relative px-8 py-4 bg-primary text-white overflow-hidden rounded-full font-medium transition-all hover:shadow-[0_0_40px_rgba(212,175,55,0.4)]">
                 <span className="relative z-10 flex items-center gap-2">Explore Portfolio <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" /></span>
               </Link>
-              <a href="https://wa.me/91728405215" className="px-8 py-4 bg-white/10 text-white backdrop-blur-md border border-white/20 rounded-full font-medium hover:bg-white/20 transition-all">
-                Contact an Agent
+              <a href="https://wa.me/917058816505" className="px-8 py-4 bg-white/10 text-white backdrop-blur-md border border-white/20 rounded-full font-medium hover:bg-white/20 transition-all">
+                Contact us
               </a>
+              <button
+                onClick={() => setReviewModalOpen(true)}
+                className="px-8 py-4 bg-white/10 text-white backdrop-blur-md border border-white/20 rounded-full font-medium hover:bg-white/20 transition-all inline-flex items-center gap-2"
+              >
+                <Star size={16} className="fill-yellow-400 text-yellow-400" /> Write a Review
+              </button>
             </motion.div>
           </motion.div>
         </div>
@@ -98,10 +107,10 @@ function Home() {
       <div className="relative -mt-20 z-20 max-w-6xl mx-auto px-6 mb-20">
         <div className="bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 border border-gray-100 flex flex-wrap justify-between items-center gap-8 backdrop-blur-xl">
           {[
-            { value: "15", label: "Years Experience", suffix: "+" },
-            { value: "850", label: "Properties Sold", suffix: "+" },
+            { value: "3.5", label: "Years Experience", suffix: "+" },
+            { value: "36", label: "Properties Sold", suffix: "+" },
             { value: "100", label: "Happy Clients", suffix: "%" },
-            { value: "25", label: "Awards Won", suffix: "" },
+            { value: "5", label: "Awards Won", suffix: "" },
           ].map((stat, i) => (
             <div key={i} className="flex-1 text-center min-w-[150px]">
               <div className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-2 flex justify-center items-baseline">
@@ -139,7 +148,7 @@ function Home() {
               <span className="w-8 h-[1px] bg-primary"></span> Our Story
             </motion.span>
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight">
-              Crafting Your Perfect Lifestyle Since 2008.
+              Crafting Your Perfect Lifestyle Since 2022.
             </motion.h2>
             <motion.p variants={fadeUp} className="text-gray-600 mb-6 text-lg font-light leading-relaxed">
               We don't just sell properties; we curate lifestyles. For over a decade, Vishwakarma Associates has been the trusted partner for discerning clients seeking extraordinary homes and lucrative investment opportunities in prime locations.
@@ -257,7 +266,10 @@ function Home() {
         </section>
       )}
 
-      {/* 7. CTA SECTION */}
+      {/* 7. TESTIMONIALS SECTION */}
+      <TestimonialsSection onWriteReview={() => setReviewModalOpen(true)} />
+
+      {/* 8. CTA SECTION */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-primary"></div>
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
@@ -270,16 +282,17 @@ function Home() {
             Connect with our premium advisors today to find your dream property or list your current home.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://wa.me/91728405215" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-dark text-white rounded-full font-bold hover:bg-black transition-colors shadow-xl inline-flex items-center justify-center gap-2">
+            <a href="https://wa.me/917058816505" target="_blank" rel="noopener noreferrer" className="px-8 py-4 bg-dark text-white rounded-full font-bold hover:bg-black transition-colors shadow-xl inline-flex items-center justify-center gap-2">
               Chat on WhatsApp <ArrowRight size={18} />
             </a>
-            <a href="tel:+91728405215" className="px-8 py-4 bg-transparent border border-white text-white rounded-full font-bold hover:bg-white hover:text-primary transition-colors inline-flex items-center justify-center gap-2">
+            <a href="tel:+917058816505" className="px-8 py-4 bg-transparent border border-white text-white rounded-full font-bold hover:bg-white hover:text-primary transition-colors inline-flex items-center justify-center gap-2">
               Call Advisor
             </a>
           </motion.div>
         </div>
       </section>
 
+      <ReviewModal isOpen={reviewModalOpen} onClose={() => setReviewModalOpen(false)} />
       <Footer />
     </div>
   );

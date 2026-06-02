@@ -12,35 +12,35 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import WhatsappButton from "../components/WhatsappButton";
 import ImageCarousel from "../components/ImageCarousel";
-import PropertyCard from "../components/PropertyCard";
+import GovernmentProjectCard from "../components/GovernmentProjectCard";
 import InquiryForm from "../components/InquiryForm";
 
 const Skeleton = ({ className }) => (
   <div className={`animate-pulse bg-gray-200 rounded-lg ${className}`}></div>
 );
 
-function PropertyDetails() {
+function GovernmentProjectDetails() {
   const { id } = useParams();
-  const [property, setProperty] = useState(null);
-  const [similarProperties, setSimilarProperties] = useState([]);
+  const [governmentProject, setGovernmentProject] = useState(null);
+  const [similarGovernmentProjects, setSimilarGovernmentProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchProperty();
+    fetchGovernmentProject();
   }, [id]);
 
-  const fetchProperty = async () => {
+  const fetchGovernmentProject = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/properties/${id}`);
-      setProperty(res.data);
+      const res = await axios.get(`http://localhost:5000/api/government-projects/${id}`);
+      setGovernmentProject(res.data);
       
-      // Fetch similar properties
-      const allRes = await axios.get("http://localhost:5000/api/properties");
+      // Fetch similar government-projects
+      const allRes = await axios.get("http://localhost:5000/api/government-projects");
       const filtered = allRes.data.filter(p => p.id !== parseInt(id) && p.type === res.data.type);
-      setSimilarProperties(filtered.slice(0, 3));
+      setSimilarGovernmentProjects(filtered.slice(0, 3));
       
       setLoading(false);
     } catch (error) {
@@ -52,8 +52,8 @@ function PropertyDetails() {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: property.title,
-        text: `Check out this property: ${property.title}`,
+        title: governmentProject.title,
+        text: `Check out this government-project: ${governmentProject.title}`,
         url: window.location.href,
       }).catch(console.error);
     } else {
@@ -83,12 +83,12 @@ function PropertyDetails() {
     );
   }
 
-  if (!property) {
+  if (!governmentProject) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 pt-24 px-6 text-center">
-        <h2 className="text-4xl font-serif text-gray-900 mb-4">Property Not Found</h2>
+        <h2 className="text-4xl font-serif text-gray-900 mb-4">GovernmentProject Not Found</h2>
         <p className="text-gray-500 mb-8">The listing you are looking for may have been removed or is currently unavailable.</p>
-        <Link to="/properties" className="px-8 py-3 bg-primary text-white rounded-full font-medium hover:shadow-lg transition-all">
+        <Link to="/government-projects" className="px-8 py-3 bg-primary text-white rounded-full font-medium hover:shadow-lg transition-all">
           Browse Portfolio
         </Link>
       </div>
@@ -96,18 +96,18 @@ function PropertyDetails() {
   }
 
   let parsedAmenities = [];
-  if (property.amenities) {
-    try { parsedAmenities = typeof property.amenities === 'string' ? JSON.parse(property.amenities) : property.amenities; } catch(e){}
+  if (governmentProject.amenities) {
+    try { parsedAmenities = typeof governmentProject.amenities === 'string' ? JSON.parse(governmentProject.amenities) : governmentProject.amenities; } catch(e){}
   }
   
   let parsedNearby = [];
-  if (property.nearby_places) {
-    try { parsedNearby = typeof property.nearby_places === 'string' ? JSON.parse(property.nearby_places) : property.nearby_places; } catch(e){}
+  if (governmentProject.nearby_places) {
+    try { parsedNearby = typeof governmentProject.nearby_places === 'string' ? JSON.parse(governmentProject.nearby_places) : governmentProject.nearby_places; } catch(e){}
   }
 
-  const allImages = property.images 
-    ? (typeof property.images === 'string' ? JSON.parse(property.images) : property.images)
-    : [property.image];
+  const allImages = governmentProject.images 
+    ? (typeof governmentProject.images === 'string' ? JSON.parse(governmentProject.images) : governmentProject.images)
+    : [governmentProject.image];
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans selection:bg-primary selection:text-white pb-20">
@@ -124,14 +124,14 @@ function PropertyDetails() {
         >
           <ImageCarousel 
             images={allImages} 
-            alt={property.title} 
+            alt={governmentProject.title} 
             className="w-full h-full opacity-70" 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-transparent to-transparent pointer-events-none"></div>
         </motion.div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-end pb-12 pointer-events-none">
-          <Link to="/properties" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors w-fit mb-6 bg-black/20 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium border border-white/10 pointer-events-auto shadow-lg hover:bg-black/40">
+          <Link to="/government-projects" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors w-fit mb-6 bg-black/20 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium border border-white/10 pointer-events-auto shadow-lg hover:bg-black/40">
             <ChevronLeft size={16} /> Return to Portfolio
           </Link>
           
@@ -139,7 +139,7 @@ function PropertyDetails() {
             <div className="max-w-3xl">
               <div className="flex gap-3 mb-4">
                 <span className="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase shadow-lg">
-                  {property.property_type || 'For Sale'}
+                  {governmentProject.project_type || 'For Sale'}
                 </span>
                 <span className="bg-white/90 backdrop-blur-sm text-gray-900 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase shadow-lg flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Active
@@ -150,10 +150,10 @@ function PropertyDetails() {
                 animate={{ opacity: 1, y: 0 }}
                 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-4 leading-tight drop-shadow-2xl"
               >
-                {property.title}
+                {governmentProject.title}
               </motion.h1>
               <div className="flex items-center gap-2 text-white/90 text-xl font-medium drop-shadow-md">
-                <MapPin size={24} className="text-primary" /> {property.address}
+                <MapPin size={24} className="text-primary" /> {governmentProject.address}
               </div>
             </div>
 
@@ -206,18 +206,18 @@ function PropertyDetails() {
             >
               
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-10 border-b border-gray-100 mb-10">
-                {property.property_type === "For Rent" ? (
+                {governmentProject.project_type === "For Rent" ? (
                   <div className="flex flex-wrap gap-12">
                     <div>
                       <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">Monthly Rent</p>
                       <p className="text-4xl md:text-6xl font-serif font-bold text-gray-900">
-                        ₹{property.rent_amount?.toLocaleString()}
+                        ₹{governmentProject.rent_amount?.toLocaleString()}
                       </p>
                     </div>
                     <div className="border-l border-gray-100 pl-12">
                       <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">Deposit</p>
                       <p className="text-4xl md:text-6xl font-serif font-bold text-gray-900">
-                        ₹{property.deposit_amount?.toLocaleString()}
+                        ₹{governmentProject.deposit_amount?.toLocaleString()}
                       </p>
                     </div>
                   </div>
@@ -226,15 +226,15 @@ function PropertyDetails() {
                     <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">Investment Opportunity</p>
                     <div className="flex items-baseline gap-3">
                       <p className="text-4xl md:text-6xl font-serif font-bold text-gray-900">
-                        ₹{((property.offer_price || property.price) / 100000).toFixed(2)}
+                        ₹{((governmentProject.offer_price || governmentProject.price) / 100000).toFixed(2)}
                       </p>
                       <span className="text-3xl text-gray-400 font-serif">Cr</span>
                     </div>
-                    {property.offer_price && property.price > property.offer_price && (
+                    {governmentProject.offer_price && governmentProject.price > governmentProject.offer_price && (
                       <div className="mt-4 flex items-center gap-3">
-                        <span className="line-through text-gray-400 text-lg">₹{(property.price / 100000).toFixed(2)} Cr</span> 
+                        <span className="line-through text-gray-400 text-lg">₹{(governmentProject.price / 100000).toFixed(2)} Cr</span> 
                         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-bold">
-                          Save ₹{((property.price - property.offer_price) / 100000).toFixed(2)} Cr
+                          Save ₹{((governmentProject.price - governmentProject.offer_price) / 100000).toFixed(2)} Cr
                         </span>
                       </div>
                     )}
@@ -243,13 +243,13 @@ function PropertyDetails() {
               </div>
 
               {/* KEY DETAILS GRID */}
-              {(property.area || property.bedrooms || property.bathrooms || property.parking) && (
+              {(governmentProject.area || governmentProject.bedrooms || governmentProject.bathrooms || governmentProject.parking) && (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                   {[
-                    { icon: Maximize2, value: property.area, label: "Sq Ft" },
-                    { icon: Bed, value: property.bedrooms, label: "Bedrooms" },
-                    { icon: Bath, value: property.bathrooms, label: "Bathrooms" },
-                    { icon: Car, value: property.parking, label: "Parking" }
+                    { icon: Maximize2, value: governmentProject.area, label: "Sq Ft" },
+                    { icon: Bed, value: governmentProject.bedrooms, label: "Bedrooms" },
+                    { icon: Bath, value: governmentProject.bathrooms, label: "Bathrooms" },
+                    { icon: Car, value: governmentProject.parking, label: "Parking" }
                   ].map((feat, i) => feat.value && (
                     <div key={i} className="flex flex-col items-center p-6 bg-gray-50/50 rounded-3xl border border-gray-100 text-center hover:bg-white hover:shadow-xl hover:border-primary/20 transition-all group">
                       <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-primary mb-4 shadow-sm group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all">
@@ -265,10 +265,10 @@ function PropertyDetails() {
               <div className="mb-16">
                 <h3 className="text-3xl font-serif font-bold text-gray-900 mb-8 flex items-center gap-3">
                   <span className="w-8 h-[2px] bg-primary"></span>
-                  Property Narrative
+                  GovernmentProject Narrative
                 </h3>
                 <p className="text-gray-600 text-xl leading-relaxed font-light whitespace-pre-line border-l-4 border-gray-50 pl-8">
-                  {property.description}
+                  {governmentProject.description}
                 </p>
               </div>
 
@@ -313,18 +313,18 @@ function PropertyDetails() {
               )}
 
               {/* MAP */}
-              {property.map_location && (
+              {governmentProject.map_location && (
                 <div>
                   <h3 className="text-3xl font-serif font-bold text-gray-900 mb-8 flex items-center gap-3">
                     <span className="w-8 h-[2px] bg-primary"></span>
                     Strategic Location
                   </h3>
                   <div className="w-full h-[500px] rounded-[2rem] overflow-hidden border border-gray-100 shadow-2xl">
-                    {property.map_location.includes('<iframe') ? (
-                      <div className="w-full h-full" dangerouslySetInnerHTML={{ __html: property.map_location.replace(/width="[^"]+"/, 'width="100%"').replace(/height="[^"]+"/, 'height="100%"') }} />
+                    {governmentProject.map_location.includes('<iframe') ? (
+                      <div className="w-full h-full" dangerouslySetInnerHTML={{ __html: governmentProject.map_location.replace(/width="[^"]+"/, 'width="100%"').replace(/height="[^"]+"/, 'height="100%"') }} />
                     ) : (
                       <iframe 
-                        src={property.map_location} 
+                        src={governmentProject.map_location} 
                         width="100%" 
                         height="100%" 
                         style={{ border: 0 }} 
@@ -383,7 +383,7 @@ function PropertyDetails() {
                         <img src="https://ui-avatars.com/api/?name=Aura+Agent&background=d4af37&color=fff" alt="Agent" className="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500 font-bold uppercase tracking-wider">Property Consultant</p>
+                        <p className="text-sm text-gray-500 font-bold uppercase tracking-wider">GovernmentProject Consultant</p>
                         <p className="text-xl font-bold text-gray-900">Vishwakarma Associates</p>
                       </div>
                     </div>
@@ -396,18 +396,18 @@ function PropertyDetails() {
                 onClick={handleShare}
                 className="w-full bg-white p-6 rounded-2xl border border-gray-100 shadow-xl flex items-center justify-center gap-3 font-bold text-gray-700 hover:bg-gray-50 transition-all mb-8"
               >
-                <Share size={20} /> Share Property
+                <Share size={20} /> Share GovernmentProject
               </button>
 
               {/* INQUIRY FORM */}
-              <InquiryForm propertyId={property.id} propertyTitle={property.title} />
+              <InquiryForm governmentProjectId={governmentProject.id} governmentProjectTitle={governmentProject.title} />
             </div>
           </div>
 
         </div>
 
         {/* RELATED PROPERTIES */}
-        {similarProperties.length > 0 && (
+        {similarGovernmentProjects.length > 0 && (
           <div className="mt-24">
             <div className="flex justify-between items-end mb-12">
               <div>
@@ -416,14 +416,14 @@ function PropertyDetails() {
                 </span>
                 <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900">Similar Masterpieces</h2>
               </div>
-              <Link to="/properties" className="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all mb-2">
+              <Link to="/government-projects" className="text-primary font-bold flex items-center gap-2 hover:gap-3 transition-all mb-2">
                 View All Portfolio <ArrowRight size={20} />
               </Link>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {similarProperties.map((p, idx) => (
-                <PropertyCard key={p.id} property={p} idx={idx} />
+              {similarGovernmentProjects.map((p, idx) => (
+                <GovernmentProjectCard key={p.id} governmentProject={p} idx={idx} />
               ))}
             </div>
           </div>
@@ -435,4 +435,4 @@ function PropertyDetails() {
   );
 }
 
-export default PropertyDetails;
+export default GovernmentProjectDetails;

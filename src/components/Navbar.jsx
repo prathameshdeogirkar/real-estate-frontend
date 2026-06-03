@@ -36,13 +36,16 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-8">
           <Link to="/" className={`text-sm font-medium tracking-wide uppercase ${textColor} hover:text-primary transition duration-300`}>Home</Link>
           <Link to="/properties" className={`text-sm font-medium tracking-wide uppercase ${textColor} hover:text-primary transition duration-300`}>Properties</Link>
+          <Link to="/construction" className={`text-sm font-medium tracking-wide uppercase ${textColor} hover:text-primary transition duration-300`}>Construction</Link>
+          <Link to="/interior-work" className={`text-sm font-medium tracking-wide uppercase ${textColor} hover:text-primary transition duration-300`}>Interior</Link>
+          <Link to="/government-projects" className={`text-sm font-medium tracking-wide uppercase ${textColor} hover:text-primary transition duration-300`}>Government</Link>
           
           <a href="https://instagram.com/vishwakarma_associates__" target="_blank" rel="noopener noreferrer" className={`${textColor} hover:text-primary transition duration-300`}>
             <Instagram size={20} />
           </a>
 
           <a
-            href="https://wa.me/91728405215"
+            href="https://wa.me/917058816505"
             target="_blank"
             rel="noopener noreferrer"
             className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
@@ -77,11 +80,14 @@ function Navbar() {
           >
             <Link to="/" onClick={() => setMenuOpen(false)} className="text-gray-900 text-lg font-medium py-2 hover:text-primary transition">Home</Link>
             <Link to="/properties" onClick={() => setMenuOpen(false)} className="text-gray-900 text-lg font-medium py-2 hover:text-primary transition">Properties</Link>
+            <Link to="/construction" onClick={() => setMenuOpen(false)} className="text-gray-900 text-lg font-medium py-2 hover:text-primary transition">Construction</Link>
+            <Link to="/interior-work" onClick={() => setMenuOpen(false)} className="text-gray-900 text-lg font-medium py-2 hover:text-primary transition">Interior Work</Link>
+            <Link to="/government-projects" onClick={() => setMenuOpen(false)} className="text-gray-900 text-lg font-medium py-2 hover:text-primary transition">Government Projects</Link>
             <a href="https://instagram.com/vishwakarma_associates__" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 text-gray-900 text-lg font-medium py-2 hover:text-primary transition">
               <Instagram size={20} /> Instagram
             </a>
             <a
-              href="https://wa.me/91728405215"
+              href="https://wa.me/917058816505"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}

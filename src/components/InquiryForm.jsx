@@ -10,6 +10,8 @@ function InquiryForm({ propertyId, propertyTitle }) {
     email: "",
     phone: "",
     whatsapp: "",
+    address: "",
+    visitDate: "",
     message: `I'm interested in ${propertyTitle}. Please provide more details.`
   });
 
@@ -32,8 +34,11 @@ function InquiryForm({ propertyId, propertyTitle }) {
 
     setLoading(true);
     try {
+      const finalMessage = `Requirement: ${formData.message}\nAddress: ${formData.address || 'N/A'}\nVisit Date: ${formData.visitDate || 'N/A'}`;
+
       await axios.post("http://localhost:5000/api/inquiries", {
         ...formData,
+        message: finalMessage,
         property_id: propertyId
       });
       toast.success("Inquiry sent successfully!");
@@ -43,6 +48,8 @@ function InquiryForm({ propertyId, propertyTitle }) {
         email: "",
         phone: "",
         whatsapp: "",
+        address: "",
+        visitDate: "",
         message: ""
       });
     } catch (error) {
@@ -111,6 +118,30 @@ function InquiryForm({ propertyId, propertyTitle }) {
                 onChange={handleChange}
                 placeholder="WhatsApp Number"
                 className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-primary focus:bg-white outline-none transition-all text-sm"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1 block">Target Address / Location</label>
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="Where do you want it?"
+                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-primary focus:bg-white outline-none transition-all text-sm"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1 block">Available Date To Visit</label>
+              <input
+                type="date"
+                name="visitDate"
+                value={formData.visitDate}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-100 focus:border-primary focus:bg-white outline-none transition-all text-sm text-gray-600"
               />
             </div>
           </div>

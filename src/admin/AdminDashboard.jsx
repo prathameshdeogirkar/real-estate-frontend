@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LayoutDashboard, PlusCircle, Settings, MessageSquare, ClipboardList, LogOut } from "lucide-react";
+import { LayoutDashboard, PlusCircle, Settings, MessageSquare, ClipboardList, LogOut, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
 
 function AdminDashboard() {
   const [unreadCount, setUnreadCount] = useState(0);
+  const [pendingReviews, setPendingReviews] = useState(0);
 
   useEffect(() => {
     fetchInquiryStats();
+    fetchReviewStats();
   }, []);
 
   const fetchInquiryStats = async () => {
@@ -21,6 +23,19 @@ function AdminDashboard() {
       setUnreadCount(unread);
     } catch (err) {
       console.error("Error fetching stats", err);
+    }
+  };
+
+  const fetchReviewStats = async () => {
+    try {
+      const token = localStorage.getItem("adminToken");
+      const res = await axios.get("http://localhost:5000/api/reviews", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const pending = res.data.filter(r => r.status === "Pending Approval").length;
+      setPendingReviews(pending);
+    } catch (err) {
+      console.error("Error fetching review stats", err);
     }
   };
 
@@ -53,6 +68,56 @@ function AdminDashboard() {
       icon: Settings, 
       color: "bg-green-500",
       desc: "Manage and remove your portfolio track record"
+    },
+    { 
+      title: "Add New Construction", 
+      path: "/admin/add-construction", 
+      icon: PlusCircle, 
+      color: "bg-indigo-400",
+      desc: "Create a new construction project"
+    },
+    { 
+      title: "Manage Construction", 
+      path: "/admin/manage-constructions", 
+      icon: ClipboardList, 
+      color: "bg-indigo-500",
+      desc: "Edit or remove construction projects"
+    },
+    { 
+      title: "Add New Interior Work", 
+      path: "/admin/add-interior-work", 
+      icon: PlusCircle, 
+      color: "bg-teal-400",
+      desc: "Create a new interior design project"
+    },
+    { 
+      title: "Manage Interior Work", 
+      path: "/admin/manage-interior-works", 
+      icon: ClipboardList, 
+      color: "bg-teal-500",
+      desc: "Edit or remove interior design works"
+    },
+    { 
+      title: "Add New Government Project", 
+      path: "/admin/add-government-project", 
+      icon: PlusCircle, 
+      color: "bg-red-400",
+      desc: "Create a new government project"
+    },
+    { 
+      title: "Manage Government Projects", 
+      path: "/admin/manage-government-projects", 
+      icon: ClipboardList, 
+      color: "bg-red-500",
+      desc: "Edit or remove government projects"
+    },
+    { 
+      title: "Manage Reviews", 
+      path: "/admin/manage-reviews", 
+      icon: Star, 
+      color: "bg-amber-500",
+      desc: "Approve, edit, or delete customer testimonials",
+      badge: pendingReviews > 0 ? `${pendingReviews} Pending` : null
     },
   ];
 

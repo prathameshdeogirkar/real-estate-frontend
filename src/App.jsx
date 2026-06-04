@@ -1,6 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import axios from "axios";
 
+// Intercept 401 errors globally to handle expired or invalid tokens
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("adminToken");
+      window.location.href = "/admin-login";
+    }
+    return Promise.reject(error);
+  }
+);
 import Home from "./pages/Home";
 import Properties from "./pages/Properties";
 import PropertyDetails from "./pages/PropertyDetails";

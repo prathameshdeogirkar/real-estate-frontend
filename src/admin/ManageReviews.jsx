@@ -18,7 +18,7 @@ function ManageReviews() {
     setLoading(true);
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await axios.get("http://localhost:5000/api/reviews", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/reviews`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setReviews(res.data);
@@ -34,7 +34,7 @@ function ManageReviews() {
     if (!window.confirm("Are you sure you want to delete this review?")) return;
     try {
       const token = localStorage.getItem("adminToken");
-      await axios.delete(`http://localhost:5000/api/reviews/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/reviews/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setReviews(reviews.filter((r) => r.id !== id));
@@ -48,7 +48,7 @@ function ManageReviews() {
   const handleStatusChange = async (id, newStatus) => {
     try {
       const token = localStorage.getItem("adminToken");
-      await axios.patch(`http://localhost:5000/api/reviews/${id}/status`, { status: newStatus }, {
+      await axios.patch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/reviews/${id}/status`, { status: newStatus }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setReviews(reviews.map((r) => (r.id === id ? { ...r, status: newStatus } : r)));
@@ -72,7 +72,7 @@ function ManageReviews() {
   const handleSaveEdit = async (id) => {
     try {
       const token = localStorage.getItem("adminToken");
-      await axios.put(`http://localhost:5000/api/reviews/${id}`, editData, {
+      await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/reviews/${id}`, editData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setReviews(reviews.map((r) => (r.id === id ? { ...r, ...editData } : r)));

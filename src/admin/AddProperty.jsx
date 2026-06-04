@@ -123,7 +123,7 @@ function AddProperty() {
         const imageData = new FormData();
         imageData.append("image", images[0]);
         const uploadRes = await axios.post(
-          "http://localhost:5000/api/upload",
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload`,
           imageData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -134,7 +134,7 @@ function AddProperty() {
           imagesData.append("images", img);
         });
         const uploadRes = await axios.post(
-          "http://localhost:5000/api/upload/multiple",
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload/multiple`,
           imagesData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -169,7 +169,7 @@ function AddProperty() {
         map_location: formData.map_location.trim()
       };
       const res = await axios.post(
-        "http://localhost:5000/api/properties/add",
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties/add`,
         propertyData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -52,7 +52,7 @@ function AddCompletedProject() {
 
       const token = localStorage.getItem("adminToken");
       const uploadRes = await axios.post(
-        "http://localhost:5000/api/upload",
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload`,
         imageData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -67,7 +67,7 @@ function AddCompletedProject() {
       };
 
       const res = await axios.post(
-        "http://localhost:5000/api/completed-projects/add",
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/completed-projects/add`,
         projectData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

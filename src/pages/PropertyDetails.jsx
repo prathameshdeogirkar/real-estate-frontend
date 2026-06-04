@@ -34,11 +34,11 @@ function PropertyDetails() {
   const fetchProperty = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/properties/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties/${id}`);
       setProperty(res.data);
       
       // Fetch similar properties
-      const allRes = await axios.get("http://localhost:5000/api/properties");
+      const allRes = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties`);
       const filtered = allRes.data.filter(p => p.id !== parseInt(id) && p.type === res.data.type);
       setSimilarProperties(filtered.slice(0, 3));
       

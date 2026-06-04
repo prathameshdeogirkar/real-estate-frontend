@@ -16,7 +16,7 @@ function ManageCompletedProjects() {
   const fetchProjects = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/completed-projects");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/completed-projects`);
       setProjects(res.data);
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -30,7 +30,7 @@ function ManageCompletedProjects() {
 
     try {
       const token = localStorage.getItem("adminToken");
-      await axios.delete(`http://localhost:5000/api/completed-projects/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/completed-projects/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Project Deleted Successfully");

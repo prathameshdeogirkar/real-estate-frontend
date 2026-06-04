@@ -23,7 +23,7 @@ function Home() {
 
   const fetchProperties = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/properties");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties`);
       setProperties(res.data);
     } catch (error) {
       console.log(error);
@@ -32,7 +32,7 @@ function Home() {
 
   const fetchCompletedProjects = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/completed-projects");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/completed-projects`);
       setCompletedProjects(res.data);
     } catch (error) {
       console.log(error);

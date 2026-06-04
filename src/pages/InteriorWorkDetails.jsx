@@ -34,11 +34,11 @@ function InteriorWorkDetails() {
   const fetchInteriorWork = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/interior-works/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/interior-works/${id}`);
       setInteriorWork(res.data);
       
       // Fetch similar interior-works
-      const allRes = await axios.get("http://localhost:5000/api/interior-works");
+      const allRes = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/interior-works`);
       const filtered = allRes.data.filter(p => p.id !== parseInt(id) && p.type === res.data.type);
       setSimilarInteriorWorks(filtered.slice(0, 3));
       

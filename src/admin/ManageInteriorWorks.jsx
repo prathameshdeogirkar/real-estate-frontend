@@ -13,7 +13,7 @@ function ManageInteriorWorks() {
   const fetchInteriorWorks = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/interior-works"
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/interior-works`
       );
 
       setInteriorWorks(res.data);
@@ -27,7 +27,7 @@ function ManageInteriorWorks() {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.delete(
-        `http://localhost:5000/api/interior-works/${id}`,
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/interior-works/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("InteriorWork Deleted");

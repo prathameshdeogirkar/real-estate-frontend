@@ -16,7 +16,7 @@ function AdminDashboard() {
   const fetchInquiryStats = async () => {
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await axios.get("http://localhost:5000/api/inquiries", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/inquiries`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const unread = res.data.filter(inq => !inq.is_read).length;
@@ -29,7 +29,7 @@ function AdminDashboard() {
   const fetchReviewStats = async () => {
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await axios.get("http://localhost:5000/api/reviews", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/reviews`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const pending = res.data.filter(r => r.status === "Pending Approval").length;

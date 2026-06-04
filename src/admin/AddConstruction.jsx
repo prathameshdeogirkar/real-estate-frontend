@@ -65,12 +65,12 @@ function AddConstruction() {
       if (images.length === 1) {
         const imageData = new FormData();
         imageData.append("image", images[0]);
-        const uploadRes = await axios.post("http://localhost:5000/api/upload", imageData, { headers: { Authorization: `Bearer ${token}` } });
+        const uploadRes = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload`, imageData, { headers: { Authorization: `Bearer ${token}` } });
         uploadedImageUrls = [uploadRes.data.imageUrl];
       } else {
         const imagesData = new FormData();
         images.forEach(img => imagesData.append("images", img));
-        const uploadRes = await axios.post("http://localhost:5000/api/upload/multiple", imagesData, { headers: { Authorization: `Bearer ${token}` } });
+        const uploadRes = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload/multiple`, imagesData, { headers: { Authorization: `Bearer ${token}` } });
         uploadedImageUrls = uploadRes.data.imageUrls;
       }
 
@@ -83,7 +83,7 @@ function AddConstruction() {
         features: formData.features ? formData.features.split(',').map(s=>s.trim()) : [],
       };
 
-      const res = await axios.post("http://localhost:5000/api/constructions/add", payload, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/constructions/add`, payload, { headers: { Authorization: `Bearer ${token}` } });
       toast.success(res.data.message || "Construction Added Successfully!");
       
       setFormData({

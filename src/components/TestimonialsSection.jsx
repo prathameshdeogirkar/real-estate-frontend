@@ -11,7 +11,7 @@ function TestimonialsSection({ onWriteReview }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/reviews/approved")
+      .get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/reviews/approved`)
       .then((res) => {
         setReviews(res.data);
         setLoading(false);

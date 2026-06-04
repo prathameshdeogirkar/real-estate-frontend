@@ -17,7 +17,7 @@ function ManageInquiries() {
     setLoading(true);
     try {
       const token = localStorage.getItem("adminToken");
-      const res = await axios.get("http://localhost:5000/api/inquiries", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/inquiries`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setInquiries(res.data);
@@ -34,7 +34,7 @@ function ManageInquiries() {
     if (!window.confirm("Are you sure you want to delete this inquiry?")) return;
     try {
       const token = localStorage.getItem("adminToken");
-      await axios.delete(`http://localhost:5000/api/inquiries/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/inquiries/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setInquiries(inquiries.filter((inq) => inq.id !== id));
@@ -47,7 +47,7 @@ function ManageInquiries() {
   const handleStatusChange = async (id, newStatus) => {
     try {
       const token = localStorage.getItem("adminToken");
-      await axios.put(`http://localhost:5000/api/inquiries/${id}/status`, { status: newStatus }, {
+      await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/inquiries/${id}/status`, { status: newStatus }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setInquiries(inquiries.map(inq => inq.id === id ? { ...inq, status: newStatus } : inq));
@@ -60,7 +60,7 @@ function ManageInquiries() {
   const handleMarkAsRead = async (id) => {
     try {
       const token = localStorage.getItem("adminToken");
-      await axios.put(`http://localhost:5000/api/inquiries/${id}/read`, {}, {
+      await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/inquiries/${id}/read`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setInquiries(inquiries.map(inq => inq.id === id ? { ...inq, is_read: true } : inq));

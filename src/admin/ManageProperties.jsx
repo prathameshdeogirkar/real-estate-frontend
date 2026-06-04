@@ -13,7 +13,7 @@ function ManageProperties() {
   const fetchProperties = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/properties"
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties`
       );
 
       setProperties(res.data);
@@ -27,7 +27,7 @@ function ManageProperties() {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.delete(
-        `http://localhost:5000/api/properties/${id}`,
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Property Deleted");

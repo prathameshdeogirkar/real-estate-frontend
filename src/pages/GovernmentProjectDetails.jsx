@@ -34,11 +34,11 @@ function GovernmentProjectDetails() {
   const fetchGovernmentProject = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/government-projects/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/government-projects/${id}`);
       setGovernmentProject(res.data);
       
       // Fetch similar government-projects
-      const allRes = await axios.get("http://localhost:5000/api/government-projects");
+      const allRes = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/government-projects`);
       const filtered = allRes.data.filter(p => p.id !== parseInt(id) && p.type === res.data.type);
       setSimilarGovernmentProjects(filtered.slice(0, 3));
       

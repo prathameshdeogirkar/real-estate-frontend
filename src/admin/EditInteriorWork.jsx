@@ -35,7 +35,7 @@ function EditInteriorWork() {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/interior-works/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/interior-works/${id}`);
       const data = res.data;
       setFormData({
         ...data,
@@ -91,12 +91,12 @@ function EditInteriorWork() {
       if (images.length === 1) {
         const imageData = new FormData();
         imageData.append("image", images[0]);
-        const uploadRes = await axios.post("http://localhost:5000/api/upload", imageData, { headers: { Authorization: `Bearer ${token}` } });
+        const uploadRes = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload`, imageData, { headers: { Authorization: `Bearer ${token}` } });
         uploadedImageUrls.push(uploadRes.data.imageUrl);
       } else if (images.length > 1) {
         const imagesData = new FormData();
         images.forEach(img => imagesData.append("images", img));
-        const uploadRes = await axios.post("http://localhost:5000/api/upload/multiple", imagesData, { headers: { Authorization: `Bearer ${token}` } });
+        const uploadRes = await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload/multiple`, imagesData, { headers: { Authorization: `Bearer ${token}` } });
         uploadedImageUrls = [...uploadedImageUrls, ...uploadRes.data.imageUrls];
       }
 
@@ -109,7 +109,7 @@ function EditInteriorWork() {
         features: formData.features ? formData.features.split(',').map(s=>s.trim()) : [],
       };
 
-      const res = await axios.put(`http://localhost:5000/api/interior-works/${id}`, payload, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.put(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/interior-works/${id}`, payload, { headers: { Authorization: `Bearer ${token}` } });
       toast.success(res.data.message || "Interior Work Updated Successfully!");
       navigate(`/admin/manage-interior-works`);
     } catch (err) {

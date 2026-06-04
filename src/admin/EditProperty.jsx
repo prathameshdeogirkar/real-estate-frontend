@@ -43,7 +43,7 @@ function EditProperty() {
   const fetchProperty = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/properties/${id}`
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties/${id}`
       );
       
       const propData = res.data;
@@ -169,7 +169,7 @@ function EditProperty() {
           imagesData.append("images", img);
         });
         const uploadRes = await axios.post(
-          "http://localhost:5000/api/upload/multiple",
+          `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload/multiple`,
           imagesData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -200,7 +200,7 @@ function EditProperty() {
       };
 
       await axios.put(
-        `http://localhost:5000/api/properties/${id}`,
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties/${id}`,
         propertyData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -34,11 +34,11 @@ function ConstructionDetails() {
   const fetchConstruction = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:5000/api/constructions/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/constructions/${id}`);
       setConstruction(res.data);
       
       // Fetch similar constructions
-      const allRes = await axios.get("http://localhost:5000/api/constructions");
+      const allRes = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/constructions`);
       const filtered = allRes.data.filter(p => p.id !== parseInt(id) && p.type === res.data.type);
       setSimilarConstructions(filtered.slice(0, 3));
       

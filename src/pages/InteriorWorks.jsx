@@ -21,7 +21,7 @@ function InteriorWorks() {
 
   const fetchInteriorWorks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/interior-works");
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/interior-works`);
       setInteriorWorks(res.data);
       setLoading(false);
     } catch (error) {

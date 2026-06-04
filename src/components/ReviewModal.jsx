@@ -27,7 +27,7 @@ function ReviewModal({ isOpen, onClose }) {
     setError("");
 
     try {
-      await axios.post("http://localhost:5000/api/reviews", formData);
+      await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/reviews`, formData);
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);

@@ -13,7 +13,7 @@ function ManageConstructions() {
   const fetchConstructions = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/constructions"
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/constructions`
       );
 
       setConstructions(res.data);
@@ -27,7 +27,7 @@ function ManageConstructions() {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.delete(
-        `http://localhost:5000/api/constructions/${id}`,
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/constructions/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Construction Deleted");

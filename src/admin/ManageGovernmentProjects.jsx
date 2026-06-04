@@ -13,7 +13,7 @@ function ManageGovernmentProjects() {
   const fetchGovernmentProjects = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/government-projects"
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/government-projects`
       );
 
       setGovernmentProjects(res.data);
@@ -27,7 +27,7 @@ function ManageGovernmentProjects() {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.delete(
-        `http://localhost:5000/api/government-projects/${id}`,
+        `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/government-projects/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("GovernmentProject Deleted");

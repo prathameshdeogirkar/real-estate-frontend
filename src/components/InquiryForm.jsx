@@ -36,7 +36,7 @@ function InquiryForm({ propertyId, propertyTitle }) {
     try {
       const finalMessage = `Requirement: ${formData.message}\nAddress: ${formData.address || 'N/A'}\nVisit Date: ${formData.visitDate || 'N/A'}`;
 
-      await axios.post("http://localhost:5000/api/inquiries", {
+      await axios.post(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/inquiries`, {
         ...formData,
         message: finalMessage,
         property_id: propertyId

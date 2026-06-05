@@ -1,15 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
+console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
 
 // Intercept 401 errors globally to handle expired or invalid tokens
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 axios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem("adminToken");
-      window.location.href = "/admin-login";
-    }
+  response => response,
+  error => {
+    console.error("Axios error:", error);
     return Promise.reject(error);
   }
 );

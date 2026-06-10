@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
 console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
@@ -48,6 +49,7 @@ import ManageReviews from "./admin/ManageReviews";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Toaster position="top-right" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<Home />} />

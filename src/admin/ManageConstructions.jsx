@@ -19,7 +19,7 @@ function ManageConstructions() {
       setConstructions(res.data);
 
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   };
 
@@ -34,7 +34,7 @@ function ManageConstructions() {
       fetchConstructions();
 
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
       toast.error("Error deleting construction");
     }
   };

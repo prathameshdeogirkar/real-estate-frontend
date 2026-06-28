@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import axios from "axios";
-console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
 
 // Intercept 401 errors globally to handle expired or invalid tokens
 axios.defaults.baseURL = import.meta.env.VITE_API_URL || "http://localhost:5000";

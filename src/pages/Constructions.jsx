@@ -25,7 +25,7 @@ function Constructions() {
       setConstructions(res.data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   };
 

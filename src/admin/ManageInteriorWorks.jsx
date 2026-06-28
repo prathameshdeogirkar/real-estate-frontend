@@ -19,7 +19,7 @@ function ManageInteriorWorks() {
       setInteriorWorks(res.data);
 
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   };
 
@@ -34,7 +34,7 @@ function ManageInteriorWorks() {
       fetchInteriorWorks();
 
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
       toast.error("Error deleting interior-work");
     }
   };

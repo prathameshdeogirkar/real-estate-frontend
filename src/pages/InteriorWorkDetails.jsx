@@ -44,7 +44,7 @@ function InteriorWorkDetails() {
       
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
       setLoading(false);
     }
   };

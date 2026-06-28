@@ -19,7 +19,7 @@ function ManageGovernmentProjects() {
       setGovernmentProjects(res.data);
 
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   };
 
@@ -34,7 +34,7 @@ function ManageGovernmentProjects() {
       fetchGovernmentProjects();
 
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
       toast.error("Error deleting government-project");
     }
   };

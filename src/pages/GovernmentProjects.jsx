@@ -25,7 +25,7 @@ function GovernmentProjects() {
       setGovernmentProjects(res.data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   };
 
@@ -43,10 +43,10 @@ function GovernmentProjects() {
   const governmentProjectTypes = ["All", "Roads", "Public Buildings", "Water", "Infrastructure", "Civic Development"];
 
   const features = [
-    { icon: <ShieldCheck className="w-5 h-5" />, title: "Govt. Approved" },
-    { icon: <Landmark className="w-5 h-5" />, title: "Public Infrastructure" },
-    { icon: <Droplets className="w-5 h-5" />, title: "Water Supply" },
-    { icon: <Map className="w-5 h-5" />, title: "Civic Development" }
+    { icon: <ShieldCheck className="w-4 h-4 md:w-5 md:h-5" />, title: "Govt. Approved" },
+    { icon: <Landmark className="w-4 h-4 md:w-5 md:h-5" />, title: "Public Infrastructure" },
+    { icon: <Droplets className="w-4 h-4 md:w-5 md:h-5" />, title: "Water Supply" },
+    { icon: <Map className="w-4 h-4 md:w-5 md:h-5" />, title: "Civic Development" }
   ];
 
   const staggerContainer = {
@@ -65,31 +65,31 @@ function GovernmentProjects() {
       <WhatsappButton />
 
       {/* HEADER SECTION */}
-      <div className="relative w-full h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-auto md:h-[60vh] min-h-[350px] md:min-h-[500px] flex items-center justify-center overflow-hidden py-16 md:py-0">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1577402985392-5eb32eaee6f9?q=80&w=2560&auto=format&fit=crop')" }}
         ></div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-900/80 to-blue-900/50"></div>
         
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 mt-20 flex flex-col md:flex-row items-center justify-between">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 mt-4 md:mt-20 flex flex-col md:flex-row items-center justify-between">
           <div className="text-left md:w-3/5">
-            <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-blue-300 font-semibold tracking-[0.2em] uppercase text-sm mb-4 inline-flex items-center gap-2 border border-blue-400/30 bg-blue-900/40 px-4 py-1.5 rounded-sm">
-              <Landmark className="w-4 h-4" /> Official Projects
+            <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-blue-300 font-semibold tracking-[0.2em] uppercase text-[10px] md:text-sm mb-2 md:mb-4 inline-flex items-center gap-2 border border-blue-400/30 bg-blue-900/40 px-3 py-1 md:px-4 md:py-1.5 rounded-sm">
+              <Landmark className="w-3 h-3 md:w-4 md:h-4" /> Official Projects
             </motion.span>
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-3xl md:text-6xl font-serif font-bold text-white mb-3 md:mb-6 leading-tight">
               Empowering Public <br/> <span className="text-blue-400">Infrastructure</span>
             </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-blue-100 font-light max-w-2xl mb-8">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-sm md:text-lg text-blue-100 font-light max-w-2xl mb-5 md:mb-8 leading-relaxed">
               Dedicated to building robust and sustainable civic amenities. Browse our portfolio of approved government and public sector projects.
             </motion.p>
             
             <motion.div 
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-              className="flex flex-wrap gap-6"
+              className="flex flex-wrap gap-2 md:gap-6"
             >
               {features.map((feat, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-white/90 text-sm font-medium bg-white/10 px-4 py-2 rounded">
+                <div key={idx} className="flex items-center gap-1.5 md:gap-2 text-white/90 text-[10px] md:text-sm font-medium bg-white/10 px-3 py-1.5 md:px-4 md:py-2 rounded">
                   <span className="text-blue-300">{feat.icon}</span>
                   {feat.title}
                 </div>
@@ -100,13 +100,13 @@ function GovernmentProjects() {
       </div>
 
       {/* FILTERS SECTION */}
-      <div className="bg-white border-b border-gray-200 py-6 sticky top-0 z-30 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap gap-3 justify-center">
+      <div className="bg-white border-b border-gray-200 py-3 md:py-6 sticky top-[72px] md:top-0 z-30 shadow-sm h-auto">
+        <div className="max-w-7xl mx-auto px-2 md:px-6 flex flex-wrap gap-1.5 md:gap-3 justify-center">
           {governmentProjectTypes.map((type) => (
             <button
               key={type}
               onClick={() => setSelectedType(type)}
-              className={`px-6 py-2 rounded font-medium transition-all duration-300 text-sm tracking-wide ${
+              className={`px-3 py-1.5 md:px-6 md:py-2 rounded font-medium transition-all duration-300 text-[10px] md:text-sm tracking-wide ${
                 selectedType === type
                   ? "bg-blue-900 text-white shadow"
                   : "bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-900"
@@ -119,16 +119,16 @@ function GovernmentProjects() {
       </div>
 
       {/* PROPERTIES GRID */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 pt-4 md:pt-6 pb-20 md:py-20">
         {filteredGovernmentProjects.length === 0 ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20">
-            <p className="text-2xl text-gray-400 font-serif mb-2">No GovernmentProjects Found</p>
-            <p className="text-gray-500 font-light">Try selecting a different government-project category.</p>
+            <p className="text-xl md:text-2xl text-gray-400 font-serif mb-2">No Government Projects Found</p>
+            <p className="text-sm md:text-base text-gray-500 font-light">Try selecting a different government-project category.</p>
           </motion.div>
         ) : (
           <motion.div 
             variants={staggerContainer} initial="hidden" animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
           >
             {filteredGovernmentProjects.map((governmentProject, idx) => (
               <GovernmentProjectCard key={governmentProject.id} governmentProject={governmentProject} idx={idx} />

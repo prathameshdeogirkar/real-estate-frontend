@@ -26,7 +26,7 @@ function Home() {
       const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/properties`);
       setProperties(res.data);
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   };
 
@@ -35,7 +35,7 @@ function Home() {
       const res = await axios.get(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/completed-projects`);
       setCompletedProjects(res.data);
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   };
 

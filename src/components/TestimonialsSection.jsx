@@ -60,10 +60,12 @@ function TestimonialsSection({ onWriteReview }) {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative">
       {/* Decorative blobs */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-72 h-72 bg-primary/10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary/10 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2" />
+      </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -115,10 +117,10 @@ function TestimonialsSection({ onWriteReview }) {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -60 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10 md:p-14 text-center max-w-3xl mx-auto"
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-6 md:p-14 text-center max-w-3xl mx-auto relative z-10"
                 >
                   <Quote size={40} className="text-primary mx-auto mb-6 opacity-60" />
-                  <p className="text-xl md:text-2xl text-gray-200 font-light italic leading-relaxed mb-8">
+                  <p className="text-lg md:text-2xl text-gray-200 font-light italic leading-relaxed mb-8 px-2 md:px-0">
                     "{reviews[current].message}"
                   </p>
                   <div className="mb-4">{renderStars(reviews[current].rating)}</div>
@@ -138,14 +140,14 @@ function TestimonialsSection({ onWriteReview }) {
                 <>
                   <button
                     onClick={prev}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 w-12 h-12 bg-white/10 hover:bg-primary text-white rounded-full flex items-center justify-center transition-all hover:scale-110 border border-white/10"
+                    className="absolute left-0 md:left-auto md:-translate-x-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-gray-800/80 md:bg-white/10 hover:bg-primary text-white rounded-full flex items-center justify-center transition-all hover:scale-110 border border-white/10 z-20 shadow-md"
                     aria-label="Previous review"
                   >
                     <ChevronLeft size={22} />
                   </button>
                   <button
                     onClick={next}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 w-12 h-12 bg-white/10 hover:bg-primary text-white rounded-full flex items-center justify-center transition-all hover:scale-110 border border-white/10"
+                    className="absolute right-0 md:right-auto md:translate-x-6 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-gray-800/80 md:bg-white/10 hover:bg-primary text-white rounded-full flex items-center justify-center transition-all hover:scale-110 border border-white/10 z-20 shadow-md"
                     aria-label="Next review"
                   >
                     <ChevronRight size={22} />
@@ -176,7 +178,7 @@ function TestimonialsSection({ onWriteReview }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="text-center mt-12"
+          className="text-center mt-12 pb-4 md:pb-0"
         >
           <button
             id="write-review-btn"

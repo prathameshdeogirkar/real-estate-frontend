@@ -104,27 +104,27 @@ function Home() {
       </div>
 
       {/* 2. STATS SECTION (Floating) */}
-      <div className="relative -mt-20 z-20 max-w-6xl mx-auto px-6 mb-20">
-        <div className="bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-12 border border-gray-100 flex flex-wrap justify-between items-center gap-8 backdrop-blur-xl">
+      <div className="relative -mt-8 md:-mt-20 z-20 max-w-6xl mx-auto px-4 md:px-6 mb-8 md:mb-20">
+        <div className="bg-white rounded-2xl shadow-lg p-4 md:p-12 border border-gray-100 grid grid-cols-2 md:flex flex-wrap justify-between items-center gap-4 md:gap-8 backdrop-blur-xl">
           {[
             { value: "3.5", label: "Years Experience", suffix: "+" },
             { value: "36", label: "Properties Sold", suffix: "+" },
             { value: "100", label: "Happy Clients", suffix: "%" },
             { value: "5", label: "Awards Won", suffix: "" },
           ].map((stat, i) => (
-            <div key={i} className="flex-1 text-center min-w-[150px]">
-              <div className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-2 flex justify-center items-baseline">
-                {stat.value}<span className="text-primary text-3xl">{stat.suffix}</span>
+            <div key={i} className="text-center">
+              <div className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-1 md:mb-2 flex justify-center items-baseline">
+                {stat.value}<span className="text-primary text-2xl md:text-3xl">{stat.suffix}</span>
               </div>
-              <p className="text-gray-500 font-medium uppercase tracking-wider text-xs">{stat.label}</p>
+              <p className="text-gray-500 font-medium uppercase tracking-wider text-[10px] md:text-xs">{stat.label}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* 3. ABOUT US SECTION */}
-      <section className="py-24 px-6 max-w-7xl mx-auto overflow-hidden">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
+      <section className="py-8 md:py-24 px-6 max-w-7xl mx-auto overflow-hidden">
+        <div className="flex flex-col lg:flex-row gap-8 md:gap-16 items-center">
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
             className="w-full lg:w-1/2 relative"
@@ -150,10 +150,10 @@ function Home() {
             <motion.h2 variants={fadeUp} className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight">
               Crafting Your Perfect Lifestyle Since 2022.
             </motion.h2>
-            <motion.p variants={fadeUp} className="text-gray-600 mb-6 text-lg font-light leading-relaxed">
+            <motion.p variants={fadeUp} className="text-gray-600 mb-4 md:mb-6 text-base md:text-lg font-light leading-relaxed">
               We don't just sell properties; we curate lifestyles. For over a decade, Vishwakarma Associates has been the trusted partner for discerning clients seeking extraordinary homes and lucrative investment opportunities in prime locations.
             </motion.p>
-            <motion.ul variants={fadeUp} className="space-y-4 mb-10">
+            <motion.ul variants={fadeUp} className="space-y-3 mb-6 md:mb-10">
               {[
                 "Exclusive access to off-market properties",
                 "Personalized white-glove concierge service",
@@ -175,9 +175,9 @@ function Home() {
       </section>
 
       {/* 4. FEATURED PROPERTIES (API) */}
-      <section className="py-24 bg-gray-50 border-t border-gray-100">
+      <section className="pt-8 pb-16 md:py-24 bg-gray-50 border-t border-gray-100 mt-4 md:mt-0">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-16 gap-4 md:gap-6">
             <div className="max-w-2xl">
               <motion.span variants={fadeUp} className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block flex items-center gap-2">
                 <span className="w-8 h-[1px] bg-primary"></span> Exclusive Listings
@@ -204,7 +204,7 @@ function Home() {
       </section>
 
       {/* 5. SERVICES SECTION */}
-      <section className="py-24 bg-dark text-white relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-dark text-white relative overflow-hidden">
         {/* Abstract Background */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/5 blur-[150px] rounded-full pointer-events-none"></div>
         
@@ -238,7 +238,7 @@ function Home() {
 
       {/* 6. COMPLETED PROJECTS (API) */}
       {completedProjects.length > 0 && (
-        <section className="py-24 max-w-7xl mx-auto px-6">
+        <section className="py-16 md:py-24 max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="text-center mb-16">
             <motion.span variants={fadeUp} className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block justify-center flex items-center gap-2">
               <span className="w-8 h-[1px] bg-primary"></span> Track Record <span className="w-8 h-[1px] bg-primary"></span>
@@ -270,7 +270,7 @@ function Home() {
       <TestimonialsSection onWriteReview={() => setReviewModalOpen(true)} />
 
       {/* 8. CTA SECTION */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-primary"></div>
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
         

@@ -72,7 +72,7 @@ function Home() {
               Discover Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-dark">Perfect</span> Sanctuary
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg md:text-xl text-gray-300 font-light mb-10 max-w-2xl">
-              Experience unparalleled elegance and exclusivity with our curated collection of premium real estate properties.
+              Delivering excellence in real estate, construction, government projects, and interior design with unmatched quality and trust.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-5 flex-wrap justify-center">
               <Link to="/properties" className="group relative px-8 py-4 bg-primary text-white overflow-hidden rounded-full font-medium transition-all hover:shadow-[0_0_40px_rgba(212,175,55,0.4)]">
